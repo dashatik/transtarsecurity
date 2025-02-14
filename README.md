@@ -1,4 +1,4 @@
-# 🚀 Transtar Security
+# 🚀 Transtar Networks
 A cutting-edge **cloud security platform** designed for **fintech, enterprises, and blockchain projects**. We focus on **VPN security, encrypted networking, and XRPL-based access control**.
 
 ## 🔹 Features
@@ -16,5 +16,5 @@ A cutting-edge **cloud security platform** designed for **fintech, enterprises, 
 ## 🚀 Quick Start
 ### 1️⃣ Clone the Repository
 ```sh
-git clone https://github.com/your-org/transtarsecurity.git
-cd transtar-security
+git clone https://github.com/your-org/transtarnetworks.git
+cd transtar-networks
