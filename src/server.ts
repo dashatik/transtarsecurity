@@ -14,12 +14,10 @@ app.use(cors());
 app.use(helmet());
 app.use(express.json());
 
-// ✅ Default Route (Fixes "Cannot GET /")
 app.get("/", (req, res) => {
   res.json({ message: "🚀 Transtar Security API is Running" });
 });
 
-// ✅ Register Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/secure", secureRoutes);
 

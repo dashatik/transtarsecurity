@@ -5,14 +5,13 @@ interface AuthenticatedRequest extends Request {
   user?: { email: string; role: string };
 }
 
-// ✅ Middleware to verify JWT Token
 export const authenticateToken = (req: AuthenticatedRequest, res: Response, next: NextFunction): void => {
   const authHeader = req.header("Authorization");
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     console.error("🚨 No token provided or incorrect format");
     res.status(401).json({ error: "Access denied" });
-    return; // ✅ Ensures function exits correctly
+    return; 
   }
 
   const token = authHeader.split(" ")[1];
@@ -22,12 +21,12 @@ export const authenticateToken = (req: AuthenticatedRequest, res: Response, next
     const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as { email: string; role: string };
     console.log("✅ Token Decoded:", decoded);
     req.user = decoded;
-    return next(); // ✅ Explicitly returning next() to ensure function behavior
+    return next();
   } catch (err) {
     const errorMessage = err instanceof Error ? err.message : "Unknown error";
     console.error("🚨 JWT Verification Failed:", errorMessage);
     res.status(403).json({ error: "Invalid token" });
-    return; // ✅ Ensure returning here as well
+    return;
   }
 };
 
@@ -37,8 +36,8 @@ export const authorizeRoles = (roles: string[]) => {
     if (!req.user || !roles.includes(req.user.role)) {
       console.error("🚨 Unauthorized role:", req.user?.role);
       res.status(403).json({ error: "Unauthorized access" });
-      return; // ✅ Ensures function exits correctly
+      return;
     }
-    return next(); // ✅ Explicit return of next()
+    return next();
   };
 };

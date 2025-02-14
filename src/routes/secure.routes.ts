@@ -4,12 +4,10 @@ import { AuthenticatedRequest } from "../types/express"; // ✅ Import custom ty
 
 const router = express.Router();
 
-// ✅ Protected route for authenticated users
 router.get("/dashboard", authenticateToken, (req: AuthenticatedRequest, res) => {
   res.json({ message: `Welcome, ${req.user?.email}` });
 });
 
-// ✅ Admin-only route
 router.get("/admin", authenticateToken, authorizeRoles(["admin"]), (req: AuthenticatedRequest, res) => {
   res.json({ message: "Admin access granted" });
 });
