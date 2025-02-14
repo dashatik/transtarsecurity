@@ -8,8 +8,7 @@ const generateToken = (email: string, role: string): string => {
   return jwt.sign({ email, role }, process.env.JWT_SECRET as string, { expiresIn: "2h" });
 };
 
-// User Signup
-export const registerUser = async (req: Request, res: Response): Promise<Response | undefined> => {
+export const registerUser = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { email, password, role } = req.body;
     if (!email || !password || !role) {
@@ -26,8 +25,7 @@ export const registerUser = async (req: Request, res: Response): Promise<Respons
   }
 };
 
-// User Login
-export const loginUser = async (req: Request, res: Response): Promise<Response | undefined> => {
+export const loginUser = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { email, password } = req.body;
     const user = users.find((u) => u.email === email);

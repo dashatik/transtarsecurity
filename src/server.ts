@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import helmet from "helmet";
 import authRoutes from "./auth/auth.routes";
+import secureRoutes from "./routes/secure.routes";
 
 dotenv.config();
 
@@ -13,8 +14,16 @@ app.use(cors());
 app.use(helmet());
 app.use(express.json());
 
-// Correctly register auth routes
+// ✅ Default Route (Fixes "Cannot GET /")
+app.get("/", (req, res) => {
+  res.json({ message: "🚀 Transtar Security API is Running" });
+});
+
+// ✅ Register Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/secure", secureRoutes);
+
+console.log("✅ JWT Secret Loaded:", process.env.JWT_SECRET);
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
